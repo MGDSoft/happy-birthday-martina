@@ -5,11 +5,12 @@
         text-align: center;
         padding: 20px;
         width: auto;
-        margin: 30px ;
+        margin: 30px;
         border-radius: 10px;
     }
+
     .cont-count{
-        margin-top: calc(20vh)
+        margin-top: 5vh
     }
     .countdown{
         font-size: 3em;
@@ -42,20 +43,37 @@
         cursor: pointer;
         text-align: center;
     }
+    .gifts h2:hover, .gifts h2:active{
+        background: #64d30b;
+        color: #000;
+    }
     .simpsons {
-         position: fixed;
-         bottom: 10px;
+        position: fixed;
+        bottom: 10px;
         width: 400px;
+    }
+    @media (max-width: 500px){
+        .container {
+            margin: 10px 0;
+            padding: 10px 0;
+            font-size: 0.8em;
+        }
+        .countdown span{
+            display: block;
+        }
+        .gifts{
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 <script>
     import Countdown from 'svelte-countdown/src/index.js'
 
     let gifts = [
-      {title: 'Safary 🐻', videoUrl: 'Hg8PYvP42DM'},
-      {title: 'Faunia 🦁', videoUrl: 'AEp6EJcXVTc'},
-      {title: 'Warner 🎢', videoUrl: '8A4x9Wuht40'},
-      {title: 'Aquopolis 🌊', videoUrl: '6DP12xs-MzE'},
+      {title: 'Safary 🐻', videoUrl: '_lOqKIYW3Tg'},
+      {title: 'Faunia 🦭', videoUrl: 'XCF83Fv99Ok'},
+      {title: 'Warner 🎢', videoUrl: 'V3fbiZWYhfc'},
+      {title: 'Warner Beach 🌊', videoUrl: 'T6x44-Y2nN8'},
     ];
     // Required there a bug in svelte-countdown library, by default remaining.done is true...
     let visible = false;
@@ -76,13 +94,13 @@
     }
 </script>
 
-<Countdown from="2023-09-07 00:00:00" dateFormat="YYYY-MM-DD H:m:s" zone="Europe/Athens" let:remaining >
+<Countdown from="2022-08-06 17:00:00" dateFormat="YYYY-MM-DD H:m:s" zone="Europe/Madrid" let:remaining >
     {#if visible}
         {#if remaining.done === false }
             <div class="container cont-count animate__animated animate__backInLeft">
                 <h2>Ya queda menos para el gran día 🦄</h2>
                 <div class="countdown">
-                    <span>{remaining.days} días</span>
+                    {#if remaining.days}<span>{remaining.days} días</span>{/if}
                     <span>{remaining.hours} horas</span>
                     <span>{remaining.minutes} minutos</span>
                     <span>{remaining.seconds} segundos</span>
@@ -100,7 +118,7 @@
                     {#each gifts as gift}
                         <div class="gift">
                             <h3>{gift.title}</h3>
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/{gift.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/{gift.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <h2 on:click={() => selectGift(gift)}>Seleccionar 👍</h2>
                         </div>
                     {/each}
@@ -108,8 +126,9 @@
             {:else}
                 <div class="container animate__animated animate__backInLeft">
                     <h1>Has elegido {giftSelected.title} </h1>
-                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/{giftSelected.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <h1>Felicidades Martina 🎂</h1>
+                    <iframe width="100%" height="415" src="https://www.youtube.com/embed/{giftSelected.videoUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h1>Buaahh!! este año pinta que lo vamos a pasar mejor que el año pasado 😎!</h1>
+                    <img src="/img/patri.jpeg">
                 </div>
             {/if}
             <div class="footer"></div>
